@@ -4,14 +4,18 @@ import Profile from "./components/Profile";
 import LogoutButton from "./components/LogoutButton";
 
 function App() {
-  const { isAuthenticated } = useAuth0();
-
+  const { isAuthenticated, isLoading } = useAuth0();
+  if (isLoading) {
+    return <div>Loading ...</div>;
+  }
   return (
-    <div>
+    <div className="min-vh-100 bg-secondary-subtle d-flex justify-content-center align-items-center">
       {isAuthenticated ? (
         <>
-          <Profile />
-          <LogoutButton />
+          <div className="border  p-5 bg-white rounded-4 shadow">
+            <Profile />
+            <LogoutButton />
+          </div>
         </>
       ) : (
         <LoginButton />
